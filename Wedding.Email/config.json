@@ -1,0 +1,25 @@
+﻿{
+  "Data": {
+    "DefaultConnection": {
+      "ConnectionString": "Server=51.255.175.21;Database=wedding;User Id=user;Password=password;Pooling=false;"
+    }
+  },
+  "Api": {
+    "PublicUri": "http://www.wedding.love/api"
+  },
+  "Smtp": {
+    "Sender": {
+      "DisplayName": "Ju & Seb",
+      "Email": "mail@wedding.love"
+    },
+    "Network": {
+      "Host": "host",
+      "Port": "587",
+      "User": "mail@wedding.love",
+      "Password": "password"
+    },
+    "Pickup": {
+      "Directory": ""
+    }
+  }
+}
