@@ -1,0 +1,47 @@
+{
+  "name": "Wedding.Api",
+  "version": "0.1.0.0",
+  "description": "Api definition of Wedding application",
+  "copyright": "Copyright © Sébastien Pierre 2016-2017",
+  "title": "Wedding Api",
+  "authors": [
+    "Sébastien Pierre"
+  ],
+  "dependencies": {
+    "Microsoft.AspNetCore.Owin": "1.1.0",
+    "Microsoft.AspNetCore.Server.Kestrel": "1.1.0",
+    "Microsoft.Extensions.Configuration.Json": "1.1.0",
+    "Nancy": "2.0.0-clinteastwood",
+    "Nancy.Authentication.Forms": "2.0.0-clinteastwood",
+    "Nancy.Serialization.JsonNet": "2.0.0-clinteastwood",
+    "SimpleStack.Orm.PostgreSQL": "1.0.2",
+    "MailKit": "1.10.2"
+  },
+  "frameworks": {
+    "netcoreapp1.1": {
+      "dependencies": {
+        "Microsoft.NETCore.App": {
+          "type": "platform",
+          "version": "1.1.0"
+        }
+      }
+    }
+  },
+  "buildOptions": {
+    "emitEntryPoint": true,
+    "copyToOutput": {
+      "includeFiles": [
+        "Content\\template_invitation.html",
+        "Content\\bootstrap.css",
+        "Content\\font-awesome.css",
+        "Content\\fontawesome-webfont.ttf",
+        "Content\\style.css",
+        "Content\\EBGaramond12-Regular.ttf",
+        "Content\\seb_ju.png",
+        "Content\\ju_seb.png",
+        "Content\\background_timeline.png",
+        "Content\\Plan Malmundarium.pdf"
+      ]
+    }
+  }
+}

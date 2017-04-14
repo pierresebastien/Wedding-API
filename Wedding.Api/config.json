@@ -1,0 +1,40 @@
+﻿{
+  "Data": {
+    "DefaultConnection": {
+      "ConnectionString": "Server=127.0.0.1;Database=wedding;User Id=user;Password=password;Pooling=false;"
+    }
+  },
+  "Api": {
+    "PublicUri": "http://www.wedding.love/api",
+    "Security": {
+      "Encryption": {
+        "Passphrase": "EncryptionPassPhrase",
+        "Salt": "EncryptionSalt"
+      },
+      "Hmac": {
+        "Passphrase": "HmacPassPhrase",
+        "Salt": "HmacSalt"
+      } 
+    } 
+  },
+  "WkHtmlToPdf": {
+    "Path": "wkhtmltopdf",
+    "Timeout": 60
+  },
+  "Smtp": {
+    "Sender": {
+      "DisplayName": "Ju & Seb",
+      "Email": "mail@wedding.love"
+    },
+    "Delivery": "Network",
+    "Network": {
+      "Host": "host",
+      "Port": "587",
+      "User": "mail@wedding.love",
+      "Password": "password"
+    },
+    "Pickup": {
+      "Directory": ""
+    }
+  }
+}

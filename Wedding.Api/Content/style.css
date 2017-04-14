@@ -1,0 +1,287 @@
+@font-face {
+  font-family: "EB Garamond";
+  src: url("EBGaramond12-Regular.ttf");
+}
+.invitation {
+  background-color: #efefef;
+  padding-bottom: 100px;
+  padding-top: 5px;
+}
+
+.content {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  list-style-type: none;
+  background-color: transparent;
+  background-image: url("background_timeline.png");
+  -webkit-background-size: 2px auto;
+  -moz-background-size: 2px auto;
+  -ms-background-size: 2px auto;
+  -o-background-size: 2px auto;
+  background-size: 2px auto;
+  background-position: center top;
+  background-repeat: repeat-y;
+  background-attachment: initial;
+}
+.content::before, .content::after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.content ul {
+  list-style: none;
+  list-style-type: none;
+  margin: 0;
+  padding: 2em 0 2em 0;
+}
+.content ul::before, .content ul::after {
+  content: '';
+  display: table;
+  line-height: 0;
+}
+.content ul::after {
+  content: '';
+  clear: both;
+}
+
+.content-avatar {
+  background: #fb5c6c;
+  position: relative;
+  display: block;
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
+  padding: 7px 8px;
+  color: #fff;
+  font-size: 24px;
+  line-height: normal;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -ms-border-radius: 100%;
+  -o-border-radius: 100%;
+  border-radius: 100%;
+}
+.content-avatar::after, .content-avatar::before {
+  top: 99%;
+  border: solid transparent;
+  content: '';
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+.content-avatar::before {
+  border-bottom-color: rgba(0, 0, 0, 0.01);
+  border-width: 12px;
+  left: 50%;
+  margin-left: -12px;
+}
+.content-avatar::after {
+  content: '';
+  border-top-color: #fb5c6c;
+  border-width: 11px;
+  left: 50%;
+  margin-left: -10.5px;
+}
+.content-avatar .img-avatar {
+  display: block;
+  width: 100%;
+  height: 100%;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -ms-border-radius: 100%;
+  -o-border-radius: 100%;
+  border-radius: 100%;
+  background-color: transparent;
+  background-image: none;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -ms-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-attachment: initial;
+  overflow: hidden;
+  background-image: url("ju_seb.png");
+}
+
+.content-item {
+  padding-bottom: 60px;
+  position: relative;
+  right: 30px;
+  float: left;
+  width: 45%;
+  margin-top: -80px;
+  margin-left: 5%;
+  clear: both;
+  padding: 2%;
+  font-family: "EB Garamond", serif;
+  color: #888;
+  background-color: #fff;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+}
+.content-item:first-child {
+  margin-top: 0;
+}
+.content-item::after, .content-item::before {
+  top: 50%;
+  right: -19px;
+  position: absolute;
+  display: block;
+  height: 32px;
+  width: 30px;
+  margin: -15px 0 0;
+  font-size: 30px;
+  line-height: 32px;
+  font-weight: 400;
+  text-align: center;
+  pointer-events: none;
+}
+.content-item::before {
+  font-family: 'FontAwesome';
+  content: '\f0dA';
+  font-style: normal;
+  display: inline-block;
+  color: #fff;
+}
+.content-item[data-event="1"]::after {
+  font-family: 'FontAwesome';
+  content: '\f228';
+}
+.content-item[data-event="2"]::after {
+  font-family: 'FontAwesome';
+  content: '\f004';
+}
+.content-item[data-event="3"]::after {
+  font-family: 'FontAwesome';
+  content: '\f000';
+}
+.content-item[data-event="4"]::after {
+  font-family: 'FontAwesome';
+  content: '\f0f5';
+}
+.content-item[data-event="5"]::after {
+  font-family: 'FontAwesome';
+  content: '\f001';
+}
+.content-item[data-event="6"]::after {
+  font-family: 'FontAwesome';
+  content: '\f236';
+}
+.content-item[data-event="7"]::after {
+  font-family: 'FontAwesome';
+  content: '\f021';
+}
+.content-item::after {
+  color: #fb5c6c !important;
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 400;
+  -webkit-box-shadow: 0 0 0 3px #fb5c6c;
+  -moz-box-shadow: 0 0 0 3px #fb5c6c;
+  -ms-box-shadow: 0 0 0 3px #fb5c6c;
+  -o-box-shadow: 0 0 0 3px #fb5c6c;
+  box-shadow: 0 0 0 3px #fb5c6c;
+  font-style: normal;
+  display: inline-block;
+  right: -46.5px;
+  width: 30px;
+  height: 30px;
+  clear: both;
+  padding: 3px 1px 0;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -ms-border-radius: 100%;
+  -o-border-radius: 100%;
+  border-radius: 100%;
+  background-color: #fff;
+}
+.content-item:nth-child(even) {
+  float: right;
+  left: 30px;
+  right: 0;
+  margin-right: 5%;
+  margin-left: 0;
+}
+.content-item:nth-child(even)::before {
+  font-family: 'FontAwesome';
+  content: '\f0d9';
+  font-style: normal;
+  display: inline-block;
+  left: -20px;
+}
+.content-item:nth-child(even)::after {
+  left: -47px;
+}
+.content-item h3 {
+  margin-top: 0;
+  margin-bottom: 3px;
+  font-size: 42px;
+  line-height: 46px;
+  font-weight: 700;
+  color: #fb5c6c;
+}
+.content-item .text {
+  font-size: 18px;
+  line-height: 26px;
+  padding-bottom: 38px;
+}
+.content-item .infos {
+  position: absolute;
+  bottom: 8px;
+  right: 20px;
+  color: #bbb;
+  font-size: 18px;
+  line-height: 23px;
+  font-weight: 400;
+}
+.content-item .infos i {
+  color: #fb5c6c;
+}
+.content-item .infos a {
+  color: #bbb;
+}
+
+.content-end .content-avatar {
+  margin-bottom: -90px;
+}
+.content-end .content-avatar::before, .content-end .content-avatar::after {
+  content: " ";
+  position: absolute;
+  top: -20px;
+  height: 0;
+  width: 0;
+  border: solid transparent;
+  pointer-events: none;
+}
+.content-end .content-avatar::before {
+  content: '';
+  left: 50%;
+  margin-left: -12px;
+  border-bottom-color: rgba(0, 0, 0, 0.01);
+  border-width: 12px;
+}
+.content-end .content-avatar::after {
+  content: '';
+  left: 50%;
+  margin-left: -10.5px;
+  border-bottom-color: #fb5c6c;
+  border-width: 11px;
+}
+.content-end .img-avatar {
+  background-image: url("seb_ju.png");
+}

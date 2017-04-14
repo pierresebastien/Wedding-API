@@ -1,0 +1,28 @@
+{
+  "name": "Wedding.Email",
+  "version": "0.1.0.0",
+  "description": "Email invitations of Wedding application",
+  "copyright": "Copyright © Sébastien Pierre 2016-2017",
+  "title": "Wedding Email",
+  "authors": [
+    "Sébastien Pierre"
+  ],
+  "dependencies": {
+    "MailKit": "1.10.2",
+    "Microsoft.Extensions.CommandLineUtils": "1.0.0-rc2-final",
+    "Wedding.Api": { "target": "project" }
+  },
+  "frameworks": {
+    "netcoreapp1.1": {
+      "dependencies": {
+        "Microsoft.NETCore.App": {
+          "type": "platform",
+          "version": "1.1.0"
+        }
+      }
+    }
+  },
+  "buildOptions": {
+    "emitEntryPoint": true
+  }
+}

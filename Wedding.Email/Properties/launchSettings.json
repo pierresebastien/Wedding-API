@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Wedding.Email": {
+      "commandName": "Project",
+      "commandLineArgs": "-c test -t pickup -r john@doe.com"
+    }
+  }
+}
