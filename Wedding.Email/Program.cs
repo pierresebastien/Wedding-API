@@ -9,6 +9,7 @@ using SimpleStack.Orm;
 using SimpleStack.Orm.PostgreSQL;
 using Wedding.Api.Business.Databases;
 using Wedding.Api.Tools;
+using Dapper;
 
 namespace Wedding.Email
 {
@@ -109,6 +110,9 @@ namespace Wedding.Email
 					case "invitations":
 						ProcessInvitationEmails();
 						break;
+					case "reminder":
+						ProcessReminderEmails();
+						break;
 				}
 			}
 			else
@@ -127,7 +131,7 @@ namespace Wedding.Email
 					user = connection.First<DbUser>(x => x.Mail == _recipient.Value());
 				}
 				string displayName = string.IsNullOrWhiteSpace(user.NickName) ? user.FirstName : user.NickName;
-				_emailSender.SendEmail(user.Mail, displayName, MailSubject, GetMailBody(user), new MimePart[0]);
+				_emailSender.SendEmail(user.Mail, displayName, MailSubject, GetInvitationMailBody(user), new MimePart[0]);
 			}
 			else
 			{
@@ -146,17 +150,89 @@ namespace Wedding.Email
 			foreach (var user in users.Where(x => !string.IsNullOrWhiteSpace(x.Mail)))
 			{
 				string displayName = string.IsNullOrWhiteSpace(user.NickName) ? user.FirstName : user.NickName;
-				_emailSender.SendEmail(user.Mail, displayName, MailSubject, GetMailBody(user), new MimePart[0]);
+				_emailSender.SendEmail(user.Mail, displayName, MailSubject, GetInvitationMailBody(user), new MimePart[0]);
 			}
 		}
 
-		private static string GetMailBody(DbUser user)
+		private static string GetInvitationMailBody(DbUser user)
 		{
 			string link = $"{_apiPublicUri}/auth/{user?.ApiKey}";
 			return string.Format(@"
 				  <div style=""font-family: Edwardian Script ITC, Trebuchet MS; text-align: center;font-size: 40px;font-weight:bold;"">
 				  <p>Tu trouveras plus d'informations et ton invitation en suivant ce lien :<br/>
 				  <a style=""font-family: Trebuchet MS;font-size: 20px;"" href=""{0}"">{0}</a>
+				  </p>
+				  <p>Sur le site tu pourras aussi nous confirmer ta présence ainsi que celle de ta/ton conjoint(e) et celle de tes enfants.</p>
+				  <p>En attendant de vous y voir,</p>
+				  <p>Gros bisous</p>
+				  </div>", link);
+		}
+
+		private static void ProcessReminderEmails()
+		{
+			IList<DbUser> users = new List<DbUser>();
+			using (OrmConnection connection = _connectionFactory.OpenConnection())
+			{
+				IList<DbUser> allUsers = connection.Select<DbUser>().ToList();
+				foreach (var user in allUsers)
+				{
+					if (!string.IsNullOrWhiteSpace(user.Mail))
+					{
+						bool mustSendMailForUser = false;
+						if (!user.IsRegistrationCompleted)
+						{
+							if (CheckNeedToSendReminder(connection, user.Id))
+							{
+								mustSendMailForUser = true;
+								users.Add(user);
+							}
+						}
+						
+						if(!mustSendMailForUser)
+						{
+							JoinSqlBuilder<FamilyUserView, DbUserLink> query = FamilyUserView.GetViewBuilder(connection.DialectProvider);
+							query.Where<DbUserLink>(x => x.UserId == user.Id);
+							IList<FamilyUserView> family = connection.Query<FamilyUserView>(query.ToSql(), query.Parameters).ToList();
+
+							foreach (var familyUser in family.Where(x => !x.IsRegistrationCompleted && string.IsNullOrWhiteSpace(x.Mail)).ToList())
+							{
+								if (CheckNeedToSendReminder(connection, familyUser.Id))
+								{
+									users.Add(user);
+									break;
+								}
+							}
+						}
+					}
+				}
+			}
+
+			foreach (var user in users)
+			{
+				string displayName = string.IsNullOrWhiteSpace(user.NickName) ? user.FirstName : user.NickName;
+				_emailSender.SendEmail(user.Mail, displayName, MailSubject, GetReminderMailBody(user), new MimePart[0]);
+			}
+		}
+
+		private static bool CheckNeedToSendReminder(OrmConnection connection, int userId)
+		{
+			JoinSqlBuilder<InvitationView, DbInvitation> query = InvitationView.GetViewBuilder(connection.DialectProvider);
+			query.Where<DbInvitation>(x => x.UserId == userId);
+			return connection.Query<InvitationView>(query.ToSql(), query.Parameters).Any(x => x.EventId == 4);
+		}
+
+		private static string GetReminderMailBody(DbUser user)
+		{
+			string link = $"{_apiPublicUri}/auth/{user?.ApiKey}";
+			return string.Format(@"
+				  <div style=""font-family: Edwardian Script ITC, Trebuchet MS; text-align: center;font-size: 40px;font-weight:bold;"">
+				  <p>Coucou chers retardataires,</p>
+				  <p>Nous attendons encore vos réponses à notre invitation de mariage pour pouvoir terminer les préparatifs de notre côté.</p>
+				  <p>Pour rappel, voici le lien vers l'invitation :<br/>
+				  <a style=""font-family: Trebuchet MS;font-size: 20px;"" href=""{0}"">{0}</a>
+				  </p>
+				  <p>Un grand merci</p>
+				  <p>PS: Le site fonctionne de façon optimale avec Firefox ou Chrome</p>
 				  </div>", link);
 		}
 	}
